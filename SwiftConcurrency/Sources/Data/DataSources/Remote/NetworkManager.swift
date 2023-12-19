@@ -142,4 +142,13 @@ final class NetworkManager {
         
         return image
     }
+    
+    func fetchThumbnailAsyncLet() async throws -> [UIImage] {
+        async let result1 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "https://www.themoviedb.org/t/p/w1280/sbgDVWrDxuUK7wHgpw8y9yMpIGD.jpg")
+        async let result2 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "https://www.themoviedb.org/t/p/w1280/jpD6z9fgNe7OqsHoDeAWQWoULde.jpg")
+        async let result3 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "https://www.themoviedb.org/t/p/w1280/318YNPBDdt4VU1nsJDdImGc8Gek.jpg")
+        
+        /// 세 가지가 모두 올 때까지 기다림
+        return try await [result1, result2, result3]
+    }
 }
