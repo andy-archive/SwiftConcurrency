@@ -14,6 +14,10 @@ import UIKit
  - Context Switching
    -> 코어의 수와 스레드의 수를 같게 함
    -> 같은 스레드 내에 continuation 전환 형식으로 방식을 변경
+ 
+ - async throws / try await -> 비동기를 동기처럼 작동
+ - Task: 비동기 함수와 동기 함수를 연결
+ - async let : DispatchGroup와 같은 역할
  */
 
 final class NetworkManager {
@@ -78,7 +82,7 @@ final class NetworkManager {
         
         let request = URLRequest( /// 요청을 할 때 타이머, 캐시 설정 시 사용
             url: url,
-            cachePolicy: .returnCacheDataElseLoad,
+            cachePolicy: .useProtocolCachePolicy,
             timeoutInterval: 10
         )
         
@@ -112,17 +116,16 @@ final class NetworkManager {
     }
     
     /// async await
-    func fetchThumbnailAsyncAwait() async throws -> UIImage {
+    func fetchThumbnailAsyncAwait(urlString: String) async throws -> UIImage {
         /// async - 비동기임을 명시
-        let urlString = "https://an2-img.amz.wtchn.net/image/v2/y8zw23wQG88i2Y3lNWetpQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk9UazFPVEkwTmpnM016QTVNamd6TWpFaWZRLjFQU194eWZtVWFUZG5KUmhsY2V5RHVlVnZXVVhEQ2hhYlhnY01KZ1Fka1k"
-        
         guard let url = URL(string: urlString) else {
             return UIImage()
         }
         
-        let request = URLRequest( /// 요청을 할 때 타이머, 캐시 설정 시 사용
+        /// 요청을 할 때 타이머, 캐시 설정 시 사용
+        let request = URLRequest(
             url: url,
-            cachePolicy: .returnCacheDataElseLoad,
+            cachePolicy: .useProtocolCachePolicy,
             timeoutInterval: 5
         )
         
