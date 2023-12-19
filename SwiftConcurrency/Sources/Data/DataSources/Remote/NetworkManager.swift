@@ -118,14 +118,17 @@ final class NetworkManager {
     /// async await
     func fetchThumbnailAsyncAwait(urlString: String) async throws -> UIImage {
         /// async - 비동기임을 명시
-        guard let url = URL(string: urlString) else {
+        
+        let tmdbURL = "https://www.themoviedb.org/t/p/w1280/\(urlString).jpg"
+        
+        guard let url = URL(string: tmdbURL) else {
             return UIImage()
         }
         
         /// 요청을 할 때 타이머, 캐시 설정 시 사용
         let request = URLRequest(
             url: url,
-            cachePolicy: .useProtocolCachePolicy,
+            cachePolicy: .returnCacheDataElseLoad,
             timeoutInterval: 5
         )
         
@@ -143,12 +146,62 @@ final class NetworkManager {
         return image
     }
     
+    /// async let
     func fetchThumbnailAsyncLet() async throws -> [UIImage] {
-        async let result1 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "https://www.themoviedb.org/t/p/w1280/sbgDVWrDxuUK7wHgpw8y9yMpIGD.jpg")
-        async let result2 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "https://www.themoviedb.org/t/p/w1280/jpD6z9fgNe7OqsHoDeAWQWoULde.jpg")
-        async let result3 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "https://www.themoviedb.org/t/p/w1280/318YNPBDdt4VU1nsJDdImGc8Gek.jpg")
+        async let result1 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "sbgDVWrDxuUK7wHgpw8y9yMpIGD")
+        async let result2 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "jpD6z9fgNe7OqsHoDeAWQWoULde")
+        async let result3 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "318YNPBDdt4VU1nsJDdImGc8Gek")
         
         /// 세 가지가 모두 올 때까지 기다림
         return try await [result1, result2, result3]
     }
+    
+    /// taskGroup & addTask
+    func fetchThumbnailTaskGroup() async throws -> [UIImage] {
+        let posterList = [
+            "sbgDVWrDxuUK7wHgpw8y9yMpIGD",
+            "jpD6z9fgNe7OqsHoDeAWQWoULde",
+            "318YNPBDdt4VU1nsJDdImGc8Gek"
+        ]
+        
+        return try await withThrowingTaskGroup(of: UIImage.self) { group in
+            
+            for item in posterList {
+                
+                /// 몇 번 동작하는지 모름 -> addTask를 통해 알려줌
+                group.addTask {
+                    try await self.fetchThumbnailAsyncAwait(urlString: item)
+                }
+            }
+            
+            var resultImageList: [UIImage] = []
+            
+            for try await item in group {
+                resultImageList.append(item)
+            }
+            
+            return resultImageList
+        }
+    }
 }
+
+/*
+ return try await withThrowingTaskGroup(of: UIImage.self) { group in
+     
+     for item in posterList {
+         
+         /// 몇 번 동작하는지 모름 -> addTask를 통해 알려줌
+         group.addTask {
+             try await self.fetchThumbnailAsyncAwait(urlString: item)
+         }
+     }
+     
+     var resultImageList: [UIImage] = []
+     
+     /// ⛔️ For-in loop requires 'ThrowingTaskGroup<UIImage, any Error>' to conform to 'Sequence'
+     for item in group {
+         resultImageList.append(item)
+     }
+     
+     return resultImageList
+ */

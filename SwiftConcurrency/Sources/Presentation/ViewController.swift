@@ -17,11 +17,12 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         Task {
-            let result = try await NetworkManager.shared.fetchThumbnailAsyncLet()
-            
+            let result = try await NetworkManager.shared.fetchThumbnailTaskGroup()
             topPosterImageView.image = result[0]
             midPosterImageView.image = result[1]
             bottomPosterImageView.image = result[2]
+            
+            return result
         }
     }
 }
@@ -66,5 +67,14 @@ final class ViewController: UIViewController {
      topPosterImageView.image = image1
      midPosterImageView.image = image2
      bottomPosterImageView.image = image3
+ }
+ 
+ /* 📌 async let */
+ Task {
+     let result = try await NetworkManager.shared.fetchThumbnailAsyncLet()
+     
+     topPosterImageView.image = result[0]
+     midPosterImageView.image = result[1]
+     bottomPosterImageView.image = result[2]
  }
  */
