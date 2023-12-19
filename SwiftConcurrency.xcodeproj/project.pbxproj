@@ -17,6 +17,7 @@
 		384D31C82B3125AD00140B5A /* SwiftConcurrencyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384D31C72B3125AD00140B5A /* SwiftConcurrencyUITests.swift */; };
 		384D31CA2B3125AD00140B5A /* SwiftConcurrencyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384D31C92B3125AD00140B5A /* SwiftConcurrencyUITestsLaunchTests.swift */; };
 		384D31E22B3127CE00140B5A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 384D31E12B3127CE00140B5A /* .gitignore */; };
+		384D31E02B31274E00140B5A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384D31DF2B31274E00140B5A /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		384D31C72B3125AD00140B5A /* SwiftConcurrencyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftConcurrencyUITests.swift; sourceTree = "<group>"; };
 		384D31C92B3125AD00140B5A /* SwiftConcurrencyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftConcurrencyUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		384D31E12B3127CE00140B5A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		384D31DF2B31274E00140B5A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 		384D31DA2B3125F900140B5A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				384D31DD2B31271F00140B5A /* DataSources */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -184,6 +187,22 @@
 				384D31B42B3125AD00140B5A /* Info.plist */,
 			);
 			path = AppInfo;
+			sourceTree = "<group>";
+		};
+		384D31DD2B31271F00140B5A /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				384D31DE2B31273000140B5A /* Remote */,
+			);
+			path = DataSources;
+			sourceTree = "<group>";
+		};
+		384D31DE2B31273000140B5A /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				384D31DF2B31274E00140B5A /* NetworkManager.swift */,
+			);
+			path = Remote;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				384D31E02B31274E00140B5A /* NetworkManager.swift in Sources */,
 				384D31AB2B3125AB00140B5A /* ViewController.swift in Sources */,
 				384D31A72B3125AB00140B5A /* AppDelegate.swift in Sources */,
 				384D31A92B3125AB00140B5A /* SceneDelegate.swift in Sources */,

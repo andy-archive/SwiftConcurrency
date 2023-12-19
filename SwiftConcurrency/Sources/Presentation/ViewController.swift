@@ -7,13 +7,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class ViewController: UIViewController {
+    
+    @IBOutlet weak var posterImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
+        NetworkManager.shared.fetchThumbnail { [weak self] image in
+            guard let self = self else { return }
+            
+            self.posterImageView = image
+        }
     }
-
-
+    
 }
-
