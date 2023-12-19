@@ -15,10 +15,26 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        NetworkManager.shared.fetchThumbnail { [weak self] image in
-            guard let self = self else { return }
+        /// fetchThumbnail
+//        NetworkManager.shared.fetchThumbnail { [weak self] image in
+//            guard let self = self else { return }
+//            
+//            self.posterImageView = image
+//        }
+        
+        /// fetchThumbnailURLSession
+        NetworkManager.shared.fetchThumbnailURLSession { [weak self] result in
+            guard let self else { return }
             
-            self.posterImageView = image
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.posterImageView.image = image
+                }
+            case .failure(let error):
+                self.posterImageView.backgroundColor = .systemGray
+                print(error.localizedDescription)
+            }
         }
     }
     
