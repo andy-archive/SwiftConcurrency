@@ -118,7 +118,7 @@ final class NetworkManager {
     /// 3) async await
     func fetchThumbnailAsyncAwait(urlString: String) async throws -> UIImage {
         /// async - 비동기임을 명시
-        
+        print(#function, Thread.isMainThread, "⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️")
         let tmdbURL = "https://www.themoviedb.org/t/p/w1280/\(urlString).jpg"
         
         guard let url = URL(string: tmdbURL) else {
@@ -135,6 +135,7 @@ final class NetworkManager {
         /// await - 비동기를 동기처럼 보이도록 작업 -> 응답이 올 때까지 기다림 ⭐️
         let (data, response) = try await URLSession.shared.data(for: request)
         
+        print(#function, Thread.isMainThread, "🏩🏩🏩🏩🏩🏩🏩🏩🏩🏩🏩🏩🏩")
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             throw NetworkError.badRequest
         }
@@ -148,6 +149,7 @@ final class NetworkManager {
     
     /// 4) async let
     func fetchThumbnailAsyncLet() async throws -> [UIImage] { /// "async"로 동작할 거야
+        print(#function, Thread.isMainThread, "🩶🩶🩶🩶🩶🩶🩶🩶🩶🩶🩶🩶")
         async let result1 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "sbgDVWrDxuUK7wHgpw8y9yMpIGD")
         async let result2 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "jpD6z9fgNe7OqsHoDeAWQWoULde")
         async let result3 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "318YNPBDdt4VU1nsJDdImGc8Gek")
