@@ -17,8 +17,12 @@ final class ViewController: UIViewController {
     //MARK: - Action
     @IBAction private func testButtonClicked(_ sender: UIButton) {
         
-        let detailViewController = DetailViewController()
-        present(detailViewController, animated: true)
+        let swiftUIView = TestSwiftUIView()
+        let hostingTestView = HostingTestView(rootView: swiftUIView)
+        present(hostingTestView, animated: true)
+        
+//        let detailViewController = DetailViewController()
+//        present(detailViewController, animated: true)
     }
     
     //MARK: - ViewDidLoad
