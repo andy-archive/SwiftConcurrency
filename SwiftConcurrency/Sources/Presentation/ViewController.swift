@@ -9,10 +9,12 @@ import UIKit
 
 final class ViewController: UIViewController {
     
+    //MARK: - UI
     @IBOutlet weak var topPosterImageView: UIImageView!
     @IBOutlet weak var midPosterImageView: UIImageView!
     @IBOutlet weak var bottomPosterImageView: UIImageView!
     
+    //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
