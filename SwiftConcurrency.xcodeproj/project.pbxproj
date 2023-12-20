@@ -16,8 +16,9 @@
 		384D31BE2B3125AD00140B5A /* SwiftConcurrencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384D31BD2B3125AD00140B5A /* SwiftConcurrencyTests.swift */; };
 		384D31C82B3125AD00140B5A /* SwiftConcurrencyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384D31C72B3125AD00140B5A /* SwiftConcurrencyUITests.swift */; };
 		384D31CA2B3125AD00140B5A /* SwiftConcurrencyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384D31C92B3125AD00140B5A /* SwiftConcurrencyUITestsLaunchTests.swift */; };
-		384D31E22B3127CE00140B5A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 384D31E12B3127CE00140B5A /* .gitignore */; };
 		384D31E02B31274E00140B5A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384D31DF2B31274E00140B5A /* NetworkManager.swift */; };
+		384D31E22B3127CE00140B5A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 384D31E12B3127CE00140B5A /* .gitignore */; };
+		38C75B1D2B3287490082AC7B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C75B1C2B3287490082AC7B /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,8 +52,9 @@
 		384D31C32B3125AD00140B5A /* SwiftConcurrencyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftConcurrencyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		384D31C72B3125AD00140B5A /* SwiftConcurrencyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftConcurrencyUITests.swift; sourceTree = "<group>"; };
 		384D31C92B3125AD00140B5A /* SwiftConcurrencyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftConcurrencyUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		384D31E12B3127CE00140B5A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		384D31DF2B31274E00140B5A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		384D31E12B3127CE00140B5A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		38C75B1C2B3287490082AC7B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			children = (
 				384D31B12B3125AD00140B5A /* LaunchScreen.storyboard */,
 				384D31AC2B3125AB00140B5A /* Main.storyboard */,
+				38C75B1C2B3287490082AC7B /* DetailViewController.swift */,
 				384D31AA2B3125AB00140B5A /* ViewController.swift */,
 			);
 			path = Presentation;
@@ -339,6 +342,7 @@
 			files = (
 				384D31E02B31274E00140B5A /* NetworkManager.swift in Sources */,
 				384D31AB2B3125AB00140B5A /* ViewController.swift in Sources */,
+				38C75B1D2B3287490082AC7B /* DetailViewController.swift in Sources */,
 				384D31A72B3125AB00140B5A /* AppDelegate.swift in Sources */,
 				384D31A92B3125AB00140B5A /* SceneDelegate.swift in Sources */,
 			);

@@ -14,6 +14,13 @@ final class ViewController: UIViewController {
     @IBOutlet weak var midPosterImageView: UIImageView!
     @IBOutlet weak var bottomPosterImageView: UIImageView!
     
+    //MARK: - Action
+    @IBAction private func testButtonClicked(_ sender: UIButton) {
+        
+        let detailViewController = DetailViewController()
+        present(detailViewController, animated: true)
+    }
+    
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
