@@ -56,7 +56,9 @@ final class ViewController: UIViewController {
     }
 }
 
-/*
+/* 📝 필기
+ @MainActor: Swift Concurrency를 작성한 코드를 다시 메인 스레드로 돌려주는 역할
+ 
  /* 📌 기존 코드 모음
   /* 1) completion with UIImage */
  NetworkManager.shared.fetchThumbnail { [weak self] image in

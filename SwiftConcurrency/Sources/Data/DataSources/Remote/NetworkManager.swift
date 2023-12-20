@@ -20,6 +20,7 @@ import UIKit
  - async let : DispatchGroup와 같은 역할
  */
 
+//@MainActor
 final class NetworkManager {
     
     //MARK: - Error
@@ -116,6 +117,7 @@ final class NetworkManager {
     }
     
     /// 3) async await
+//    @MainActor /* MainThread -> DispatchQueue.async.main과 같은 역할 */
     func fetchThumbnailAsyncAwait(urlString: String) async throws -> UIImage {
         /// async - 비동기임을 명시
         print(#function, Thread.isMainThread, "⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️")
@@ -148,6 +150,7 @@ final class NetworkManager {
     }
     
     /// 4) async let
+//    @MainActor
     func fetchThumbnailAsyncLet() async throws -> [UIImage] { /// "async"로 동작할 거야
         print(#function, Thread.isMainThread, "🩶🩶🩶🩶🩶🩶🩶🩶🩶🩶🩶🩶")
         async let result1 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "sbgDVWrDxuUK7wHgpw8y9yMpIGD")
