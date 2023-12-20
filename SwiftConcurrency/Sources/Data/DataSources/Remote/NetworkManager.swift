@@ -20,6 +20,7 @@ import UIKit
  - async let : DispatchGroup와 같은 역할
  */
 
+//@MainActor
 final class NetworkManager {
     
     //MARK: - Error
@@ -55,7 +56,7 @@ final class NetworkManager {
     private init() { }
     
     //MARK: - Methods
-    /// completion with UIImage
+    /// 1) completion with UIImage
     func fetchThumbnail(completion: @escaping (UIImage) -> Void ) {
         let urlString = "https://an2-img.amz.wtchn.net/image/v2/y8zw23wQG88i2Y3lNWetpQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk9UazFPVEkwTmpnM016QTVNamd6TWpFaWZRLjFQU194eWZtVWFUZG5KUmhsY2V5RHVlVnZXVVhEQ2hhYlhnY01KZ1Fka1k"
         
@@ -74,7 +75,7 @@ final class NetworkManager {
         }
     }
     
-    /// completion with Result
+    /// 2) completion with Result
     func fetchThumbnailURLSession(completion: @escaping ( Result<UIImage, NetworkError> ) -> Void ) {
         let urlString = "https://an2-img.amz.wtchn.net/image/v2/y8zw23wQG88i2Y3lNWetpQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk9UazFPVEkwTmpnM016QTVNamd6TWpFaWZRLjFQU194eWZtVWFUZG5KUmhsY2V5RHVlVnZXVVhEQ2hhYlhnY01KZ1Fka1k"
         
@@ -115,10 +116,11 @@ final class NetworkManager {
         task.resume()
     }
     
-    /// async await
+    /// 3) async await
+//    @MainActor /* MainThread -> DispatchQueue.async.main과 같은 역할 */
     func fetchThumbnailAsyncAwait(urlString: String) async throws -> UIImage {
         /// async - 비동기임을 명시
-        
+        print(#function, Thread.isMainThread, "⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️⚽️")
         let tmdbURL = "https://www.themoviedb.org/t/p/w1280/\(urlString).jpg"
         
         guard let url = URL(string: tmdbURL) else {
@@ -135,6 +137,7 @@ final class NetworkManager {
         /// await - 비동기를 동기처럼 보이도록 작업 -> 응답이 올 때까지 기다림 ⭐️
         let (data, response) = try await URLSession.shared.data(for: request)
         
+        print(#function, Thread.isMainThread, "🏩🏩🏩🏩🏩🏩🏩🏩🏩🏩🏩🏩🏩")
         guard (response as? HTTPURLResponse)?.statusCode == 200 else {
             throw NetworkError.badRequest
         }
@@ -146,17 +149,19 @@ final class NetworkManager {
         return image
     }
     
-    /// async let
-    func fetchThumbnailAsyncLet() async throws -> [UIImage] {
+    /// 4) async let
+//    @MainActor
+    func fetchThumbnailAsyncLet() async throws -> [UIImage] { /// "async"로 동작할 거야
+        print(#function, Thread.isMainThread, "🩶🩶🩶🩶🩶🩶🩶🩶🩶🩶🩶🩶")
         async let result1 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "sbgDVWrDxuUK7wHgpw8y9yMpIGD")
         async let result2 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "jpD6z9fgNe7OqsHoDeAWQWoULde")
         async let result3 = NetworkManager.shared.fetchThumbnailAsyncAwait(urlString: "318YNPBDdt4VU1nsJDdImGc8Gek")
         
         /// 세 가지가 모두 올 때까지 기다림
-        return try await [result1, result2, result3]
+        return try await [result1, result2, result3] /// 비동기가 모두 완료될 때까지 기다려
     }
     
-    /// taskGroup & addTask
+    /// 5) taskGroup & addTask
     func fetchThumbnailTaskGroup() async throws -> [UIImage] {
         let posterList = [
             "sbgDVWrDxuUK7wHgpw8y9yMpIGD",
